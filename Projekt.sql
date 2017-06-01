@@ -18,17 +18,31 @@ WITH (
 )
 TABLESPACE pg_default;
 
-CREATE TABLE PUBLIC.Hashtag
+CREATE TABLE public.hashtag
 (
-    Inhalt text COLLATE pg_catalog."default",	
-	Anzahl_Vorkommen INTEGER,
-	Benutzungszeitpunkte DATE ARRAY[200],
-    tritt_auf_mit text ARRAY[10],
-	Tweet_ID INTEGER NOT NULL,
-    
-	CONSTRAINT hpk PRIMARY KEY (Inhalt)
+    hashtagid integer NOT NULL,
+    inhalt text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT hpk PRIMARY KEY (hashtagid)
 )
 WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
+
+ALTER TABLE public.hashtag
+    OWNER to postgres;
+
+CREATE TABLE public.vorkommen_in
+(
+    tweet_id integer NOT NULL,
+    vorkommen date NOT NULL,
+    hashtagid integer NOT NULL,
+    CONSTRAINT vorkommen_in_pkey PRIMARY KEY (tweet_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.vorkommen_in
+    OWNER to postgres;
