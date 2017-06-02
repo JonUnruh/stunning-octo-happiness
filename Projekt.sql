@@ -37,7 +37,7 @@ CREATE TABLE public.vorkommen_in
     tweet_id integer NOT NULL,
     vorkommen date NOT NULL,
     hashtagid integer NOT NULL,
-    CONSTRAINT vorkommen_in_pkey PRIMARY KEY (tweet_id)
+    CONSTRAINT vorkommen_in_pkey PRIMARY KEY (hashtagid)
 )
 WITH (
     OIDS = FALSE
