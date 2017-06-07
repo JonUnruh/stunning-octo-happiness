@@ -7,7 +7,7 @@ FROM 'C:\Program Files\PostgreSQL\9.6\data\amelec-hashtag.csv'
 WITH DELIMITER ';' CSV HEADER;
 
 CREATE temporary TABLE t (x1 integer, 
-	tweet_id float NOT NULL,
+    tweet_id float NOT NULL,
     vorkommen timestamp NOT NULL,
     hashtagid float NOT NULL);
 
