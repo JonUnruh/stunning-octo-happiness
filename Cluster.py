@@ -3,6 +3,7 @@ import pandas as pd
 from matplotlib import pyplot
 import numpy as np
 
+#Berechnung der Abstaende der Wortlaengen
 df = pd.read_csv('amelec-hashtag.csv', sep=';', encoding = 'latin-1')
 arr = df['Inhalt'].str.len()
 arr = np.array(arr)
@@ -14,6 +15,7 @@ for x in data:
         yoho[count] = abs(x - y)
         count = count +1
 
+#Funktion zur Berechnung der Levenshtein-Distanz
 rum = np.zeros(shape=(225625,1))
 
 def distance(first, second):
@@ -38,15 +40,17 @@ def distance(first, second):
             distance_matrix[i][j] = min(insertion, deletion, substitution)
     return distance_matrix[first_length-1][second_length-1]
 
+#Berechung der Levenshtein-Distanzen der Hashtags
 count = 0
 for x in df['Inhalt']:
     for y in df['Inhalt']:
         rum[count] = distance(x, y)
         count = count +1
 
+#K-means und Clustering incl. Plotten
 data = np.concatenate((yoho, rum), axis = 1)
 
-k = 3
+k = 5
 kmeans = cluster.KMeans(n_clusters=k)
 kmeans.fit(data)
 labels = kmeans.labels_
